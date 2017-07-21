@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pokedex</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row search-area">
+			<header class="col-6">
+				<h1>Pokedex</h1>
+			</header>
+			<div class="col-6">
+				<form class="form-field">
+					<h3 class="title">Busca por nombre o número</h3>
+					<input type="text" id="searchField">
+					<button id="searchBtn" type="submit" value="Submit">Buscar</button>
+				</form>
+				<form class="form-field">
+					<h3 class="title">Filtra por tipo</h3>
+					<select id=pokemonType>
+					</select>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row result-area" id=pokedexRow>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/pokedex.js"></script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+.search-area {
+	background-color: rgb(241, 43, 43);
+    height: 90px;
+    border-radius: 4px;
+}
+.form-field {
+	display: inline-flex;
+}
+h1{
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	float: left;
+}
+h2{
+	font-size: 1.4rem;
+	text-transform: capitalize;
+}
+.title {
+	font-size: 14px;
+	color: white;
+	margin-right: 10px;
+    margin-top: 6px;
+}
+.pokemon-card {
+	margin: 10px;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    background-color: white;
+}
+img {
+	margin-top: 1rem;
+}
+.result-area{
+	background-color: #f4f4f4;
+}
+.strong{
+	text-transform: capitalize;
+}
