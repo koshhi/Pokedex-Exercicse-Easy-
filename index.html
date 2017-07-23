@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>Pokedex</title>
@@ -7,6 +7,47 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<!-- Processing Modal -->
+	<div class="modal hide" id="processModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Processing...</h5>
+	      </div>
+	      <div class="modal-body">
+	        <div class="progress">
+			  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Single Pokemon Modal -->
+	<div class="modal hide" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	    <div class="alert alert-success" id="modalAlert" hidden>
+		  
+		</div>
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="pokemonModalTitle"></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	      </div>
+	      <div class="modal-body">
+	        <img id="pokemonModalImage" src="">
+	        <p id="pokemonModalDescription"></p>
+	        <p>Pokemon type: <strong id="pokemonModalType"></strong></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="modalEvoBtn">Evolution</button>
+	      	<button type="button" class="btn btn-danger" id="modalSaveBtn">Save</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<div class="container">
 		<div class="row search-area">
 			<header class="col-6">
@@ -20,9 +61,11 @@
 				</form>
 				<form class="form-field">
 					<h3 class="title">Filtra por tipo</h3>
-					<select id=pokemonType>
+					<select id="pokemonType">
+						<option selected="selected">-- Ninguno --</option>
 					</select>
 				</form>
+				<button type="button" id="viewSavedBtn">View Saved</button>
 			</div>
 		</div>
 	</div>
@@ -31,6 +74,8 @@
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/pokedex.js"></script>
     </body>
 </html>
