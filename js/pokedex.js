@@ -48,7 +48,7 @@ function hideProgressModal() {
 
 // -- Funciones para mostrar u ocultar mensajes de alerta
 
-function showModalAlert(title, message, alertId) {
+function showAlert(title, message, alertId) {
 	var alertHtml = "<strong>"+title+"</strong> "+message;
 	$(alertId).removeAttr("hidden");
 	$(alertId).empty();
@@ -141,10 +141,10 @@ function addPokemon(pokemon, modal) {
 		var pokeCard = "";
 
 		if(pokemon.evoId.trim() !== ""){
-			pokeCard = '<div class="col-4 pokemon-card"><div class="container" data-pokemon="'+pokemon.id+'"><img src="'+ pokemon.imageUrl +'" alt="pokemon"><h2>'+ pokemon.name +'</h2><p>'+ pokemon.description +'</p><p>Pokemon type:<br><strong>'+pokemon.type+'</strong></p><button id="modalEvoBtn" class="btn btn-primary" data-evo="'+pokemon.evoId+'">Evolution</button><br><br></div></div>';
+			pokeCard = '<div class="col-4 pokemon-card"><div class="container" data-pokemon="'+pokemon.id+'"><img src="'+ pokemon.imageUrl +'" alt="pokemon"><h2>'+ pokemon.name +'</h2><p>'+ pokemon.description +'</p><p>Pokemon type:<br><strong>'+pokemon.type+'</strong></p><button id="modalEvoBtn" class="btn btn-primary" data-evo="'+pokemon.evoId+'">Evolution</button><button id="saveBtn" class="btn btn-danger" style="margin-left: 10px;" data-evo="'+pokemon.evoId+'">Save</button><br><br></div></div>';
 		}
 		else {
-			pokeCard = pokeCard = '<div class="col-4 pokemon-card"><div class="container" data-pokemon="'+pokemon.id+'"><img src="'+ pokemon.imageUrl +'" alt="pokemon"><h2>'+ pokemon.name +'</h2><p>'+ pokemon.description +'</p><p>Pokemon type:<br><strong>'+pokemon.type+'</strong></p><br><br></div></div>';
+			pokeCard = pokeCard = '<div class="col-4 pokemon-card"><div class="container" data-pokemon="'+pokemon.id+'"><img src="'+ pokemon.imageUrl +'" alt="pokemon"><h2>'+ pokemon.name +'</h2><p>'+ pokemon.description +'</p><p>Pokemon type:<br><strong>'+pokemon.type+'</strong></p><button id="saveBtn" class="btn btn-danger" style="margin-left: 10px;" data-evo="'+pokemon.evoId+'">Save</button><br><br></div></div>';
 		}
 
 		pokedexRow.append(pokeCard);
@@ -247,6 +247,30 @@ pokedexRow.on("click", "#modalEvoBtn", function(e) {
 	getPokemon("http://pokeapi.co/api/v2/pokemon/" + $(this).attr("data-evo"), true);
 });
 
+// Evento que obtendrá la evolución del pokemon mostrado en la lista
+pokedexRow.on("click", "#saveBtn", function(e) {
+	e.preventDefault();
+
+	var evo = "";
+
+	if($(this).attr("data-evo") !== undefined){
+		evo = $(this).attr("data-evo");
+	}
+
+	var id = $(this).parent().attr("data-pokemon");
+	var name = $(this).parent().children("h2").text();
+	var desc = $(this).parent().children("p:first").text();
+	var type = $(this).parent().children("p").eq(1).children("strong").text();
+	var image = $(this).parent().children("img").attr("src");
+
+	var pokemon = new Pokemon(id, name, desc, type, image, evo);
+	sessionStorage.setItem(id, JSON.stringify(pokemon));
+
+	showAlert("Success!", "Pokemon saved successfully!", "#resultAlert");
+	$(this).attr("hidden", "hidden");
+	setTimeout(function(){ hideModalAlert("#resultAlert") }, 3000);
+});
+
 // Evento que guardará en sessionStorage los pokemons que se muestran en los modales
 modalSaveBtn.on("click", function(e) {
 	e.preventDefault();
@@ -260,7 +284,7 @@ modalSaveBtn.on("click", function(e) {
 	var pokemon = new Pokemon(modalTitle.attr("data-id"), modalTitle.text(), modalDesc.text(), modalType.text(), modalImage.attr("src"), evo);
 	sessionStorage.setItem(modalTitle.attr("data-id"), JSON.stringify(pokemon));
 
-	showModalAlert("Success!", "Pokemon saved successfully!", "#modalAlert");
+	showAlert("Success!", "Pokemon saved successfully!", "#modalAlert");
 	$(this).attr("hidden", "hidden");
 	setTimeout(function(){ hideModalAlert("#modalAlert") }, 3000);
 });
